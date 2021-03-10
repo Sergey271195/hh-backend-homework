@@ -88,6 +88,22 @@
 
 `GET /vacancy`
 
+**Параметры:**
+
+* **query** - текст для поиска
+
+Возвращает массив из объектов с полями:
+* id
+* name
+* area
+* **salary** - зарплата в том же формате, что в api hh.ru
+* created_at
+* employer
+
+### Получить вакансию
+
+`GET /vacancy/{vacancy_id}`
+
 Возвращает объект с полями:
 * id
 * name
@@ -130,3 +146,4 @@
 * employer
 * **popularity** - та же логика, что и в компаниях
 * views_count
+* comment
