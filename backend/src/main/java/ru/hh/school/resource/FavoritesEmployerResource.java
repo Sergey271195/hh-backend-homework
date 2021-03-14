@@ -2,6 +2,7 @@ package ru.hh.school.resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.hh.nab.common.properties.FileSettings;
 import ru.hh.school.dto.FavoriteEmployerDto;
 import ru.hh.school.service.EmployerService;
 
@@ -18,9 +19,11 @@ public class FavoritesEmployerResource {
     private static final Logger logger = LoggerFactory.getLogger(FavoritesEmployerResource.class);
 
     private final EmployerService employerService;
+    private final FileSettings fileSettings;
 
-    public FavoritesEmployerResource(EmployerService employerService) {
+    public FavoritesEmployerResource(EmployerService employerService, FileSettings fileSettings) {
         this.employerService = employerService;
+        this.fileSettings = fileSettings;
     }
 
     @GET
@@ -29,7 +32,9 @@ public class FavoritesEmployerResource {
             @DefaultValue("0") @QueryParam("page") Integer page,
             @DefaultValue("20") @QueryParam("per_page") Integer perPage) {
         List<FavoriteEmployerDto> favoriteEmployers = employerService.getFavorites(page, perPage);
-        return Response.ok().entity(favoriteEmployers).build();
+        return Response.ok()
+                .header("Access-Control-Allow-Origin", fileSettings.getString("cors.settings"))
+                .entity(favoriteEmployers).build();
     }
 
     @POST
@@ -39,7 +44,9 @@ public class FavoritesEmployerResource {
             @DefaultValue("") @FormParam("comment") String comment) {
         try {
             employerService.addEmployerToFavorites(employerId, comment);
-            return Response.ok().build();
+            return Response.ok()
+                    .header("Access-Control-Allow-Origin", fileSettings.getString("cors.settings"))
+                    .build();
         } catch (WebApplicationException exception) {
             throw new WebApplicationException(exception.getMessage(), exception.getResponse().getStatus());
         }
@@ -52,7 +59,9 @@ public class FavoritesEmployerResource {
             @PathParam("employer_id") Integer employerId,
             @DefaultValue("") @FormParam("comment") String comment) {
         employerService.updateComment(employerId, comment);
-        return Response.ok().build();
+        return Response.ok()
+                .header("Access-Control-Allow-Origin", fileSettings.getString("cors.settings"))
+                .build();
     }
 
     @DELETE
@@ -60,7 +69,9 @@ public class FavoritesEmployerResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response deleteCompany(@PathParam("employer_id") Integer employerId) {
         employerService.deleteCompany(employerId);
-        return Response.ok().build();
+        return Response.ok()
+                .header("Access-Control-Allow-Origin", fileSettings.getString("cors.settings"))
+                .build();
     }
 
     @POST
@@ -69,7 +80,9 @@ public class FavoritesEmployerResource {
     public Response refresh(@PathParam("employer_id") Integer employerId) {
         try {
             employerService.refresh(employerId);
-            return Response.ok().build();
+            return Response.ok()
+                    .header("Access-Control-Allow-Origin", fileSettings.getString("cors.settings"))
+                    .build();
         } catch (WebApplicationException exception) {
             throw new WebApplicationException(exception.getMessage(), exception.getResponse().getStatus());
         }

@@ -2,9 +2,8 @@ package ru.hh.school.resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.hh.school.dto.FavoriteEmployerDto;
+import ru.hh.nab.common.properties.FileSettings;
 import ru.hh.school.dto.FavoriteVacancyDto;
-import ru.hh.school.service.EmployerService;
 import ru.hh.school.service.VacancyService;
 
 import javax.inject.Singleton;
@@ -20,9 +19,11 @@ public class FavoritesVacancyResource {
     private static final Logger logger = LoggerFactory.getLogger(FavoritesVacancyResource.class);
 
     private final VacancyService vacancyService;
+    private final FileSettings fileSettings;
 
-    public FavoritesVacancyResource(VacancyService vacancyService) {
+    public FavoritesVacancyResource(VacancyService vacancyService, FileSettings fileSettings) {
         this.vacancyService = vacancyService;
+        this.fileSettings = fileSettings;
     }
 
     @GET
@@ -31,7 +32,9 @@ public class FavoritesVacancyResource {
             @DefaultValue("0") @QueryParam("page") Integer page,
             @DefaultValue("20") @QueryParam("per_page") Integer perPage) {
         List<FavoriteVacancyDto> favoriteVacancies = vacancyService.getFavorites(page, perPage);
-        return Response.ok().entity(favoriteVacancies).build();
+        return Response.ok()
+                .header("Access-Control-Allow-Origin", fileSettings.getString("cors.settings"))
+                .entity(favoriteVacancies).build();
     }
 
     @POST
@@ -42,7 +45,9 @@ public class FavoritesVacancyResource {
     ) {
         try {
             vacancyService.addVacancyToFavorites(vacancyId, comment);
-            return Response.ok().build();
+            return Response.ok()
+                    .header("Access-Control-Allow-Origin", fileSettings.getString("cors.settings"))
+                    .build();
         } catch (WebApplicationException exception) {
             throw new WebApplicationException(exception.getMessage(), exception.getResponse().getStatus());
         }
@@ -53,7 +58,9 @@ public class FavoritesVacancyResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response deleteCompany(@PathParam("vacancy_id") Integer vacancyId) {
         vacancyService.deleteVacancy(vacancyId);
-        return Response.ok().build();
+        return Response.ok()
+                .header("Access-Control-Allow-Origin", fileSettings.getString("cors.settings"))
+                .build();
     }
 
     @POST
@@ -62,7 +69,9 @@ public class FavoritesVacancyResource {
     public Response refresh(@PathParam("vacancy_id") Integer vacancyId) {
         try {
             vacancyService.refresh(vacancyId);
-            return Response.ok().build();
+            return Response.ok()
+                    .header("Access-Control-Allow-Origin", fileSettings.getString("cors.settings"))
+                    .build();
         } catch (WebApplicationException exception) {
             throw new WebApplicationException(exception.getMessage(), exception.getResponse().getStatus());
         }

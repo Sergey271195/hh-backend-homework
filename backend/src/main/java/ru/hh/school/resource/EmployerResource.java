@@ -2,6 +2,7 @@ package ru.hh.school.resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.hh.nab.common.properties.FileSettings;
 import ru.hh.school.dto.EmployerDto;
 import ru.hh.school.service.ApiService;
 import ru.hh.school.component.EmployerMapper;
@@ -20,10 +21,12 @@ public class EmployerResource {
 
     private final ApiService apiService;
     private final EmployerMapper employerMapper;
+    private final FileSettings fileSettings;
 
-    public EmployerResource(ApiService apiService, EmployerMapper employerMapper) {
+    public EmployerResource(ApiService apiService, EmployerMapper employerMapper, FileSettings fileSettings) {
         this.apiService = apiService;
         this.employerMapper = employerMapper;
+        this.fileSettings = fileSettings;
     }
 
     @GET
@@ -36,7 +39,9 @@ public class EmployerResource {
         try {
             String dataFromApi = apiService.fetchEmployersFromApi(query, page, perPage);
             List<EmployerDto> employers = employerMapper.mapListOfItemsFromApi(dataFromApi);
-            return Response.ok().entity(employers).build();
+            return Response.ok()
+                    .header("Access-Control-Allow-Origin", fileSettings.getString("cors.settings"))
+                    .entity(employers).build();
         } catch (WebApplicationException exception) {
             throw new WebApplicationException(exception.getMessage(), exception.getResponse().getStatus());
         }
@@ -49,7 +54,9 @@ public class EmployerResource {
         try {
             String dataFromApi = apiService.fetchEmployersFromApiById(employerId);
             EmployerDto employer = employerMapper.mapSingleItemFromApiToDto(dataFromApi);
-            return Response.ok().entity(employer).build();
+            return Response.ok()
+                    .header("Access-Control-Allow-Origin", fileSettings.getString("cors.settings"))
+                    .entity(employer).build();
         } catch (WebApplicationException exception) {
             throw new WebApplicationException(exception.getMessage(), exception.getResponse().getStatus());
         }
