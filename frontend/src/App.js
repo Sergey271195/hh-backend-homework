@@ -1,7 +1,8 @@
 import "./App.css";
+import MainpageComponent from "./components/MainpageComponent";
 
 function App() {
-  return <div>HH HOMEWORK</div>;
+    return <MainpageComponent />;
 }
 
 export default App;
