@@ -13,6 +13,9 @@ public class CustomExceptionMapper extends WebApplicationExceptionMapper {
         int status = exception.getResponse().getStatus();
         String message = exception.getMessage() == null ? "" : exception.getMessage();
         ExceptionResponse exceptionResponse = new ExceptionResponse(message, status);
-        return Response.status(status).entity(exceptionResponse).build();
+        return Response
+                .status(status)
+                .header("Access-Control-Allow-Origin", "*")
+                .entity(exceptionResponse).build();
     }
 }
