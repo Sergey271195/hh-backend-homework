@@ -1,0 +1,26 @@
+version : "3.9"
+
+services:
+  postgres:
+    image: postgres:13-alpine
+    restart: always
+    volumes:
+      - ./backend/init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment: 
+      POSTGRES_USER: hh
+      POSTGRES_PASSWORD: hh
+      POSTGRES_DB: hh
+    ports: 
+      - 5432:5432
+  backend:
+    build: ./backend
+    ports:
+      - 8080
+    depends_on:
+      - postgres
+  frontend:
+    build: ./frontend
+    ports:
+      - 8080:80
+    depends_on:
+      - backend

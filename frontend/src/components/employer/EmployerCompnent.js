@@ -6,7 +6,7 @@ import EmployerFavoritesComponent from "./EmployerFavoritesComponent";
 import IdFormComponent from "../util/IdFormComponent";
 import EmployerGetSingleComponent from "./EmployerGetSingleComponent";
 
-const BASE_URL = "http://localhost:8080";
+const BASE_URL = "/api";
 
 const EmployerCompnent = () => {
     const [get, setGet] = useState(true);

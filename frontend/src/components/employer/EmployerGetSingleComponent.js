@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ErrorComponent from "../util/ErrorComponent";
 
-const BASE_URL = "http://localhost:8080";
+const BASE_URL = "/api";
 
 const EmployerGetSingleComponent = ({ employers, error }) => {
     const [comment, setComment] = useState("");

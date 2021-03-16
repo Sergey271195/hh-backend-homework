@@ -2,7 +2,7 @@ import React from "react";
 import ErrorComponent from "../util/ErrorComponent";
 import EmployerFavoriteItem from "./EmployerFavoriteItem";
 
-const BASE_URL = "http://localhost:8080";
+const BASE_URL = "/api";
 
 const EmployerFavoritesComponent = ({ employers, error }) => {
     const deleteEmployer = (employerId) => {
