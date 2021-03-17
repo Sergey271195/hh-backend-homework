@@ -1,12 +1,4 @@
-SET timezone = 'Europe/Moscow';
 
-DROP TABLE area CASCADE;
-DROP TABLE employer CASCADE;
-DROP TABLE vacancy CASCADE;
-DROP TABLE employer_counter CASCADE;
-DROP TABLE vacancy_counter CASCADE;
-DROP TABLE employer_comment CASCADE;
-DROP TABLE vacancy_comment CASCADE;
 
 CREATE TABLE IF NOT EXISTS employer_counter (
     id INTEGER PRIMARY KEY,

@@ -77,4 +77,17 @@ public class FavoritesVacancyResource {
         }
     }
 
+    @OPTIONS
+    @Path("{var:.*}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response allowOptions() {
+        logger.info("OPTIONS METHOD");
+        return Response.ok()
+                    .header("Access-Control-Allow-Origin", fileSettings.getString("cors.settings"))
+                    .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
+                    .header("Access-Control-Allow-Credentials", "true")
+                    .header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
+                    .build();
+    }
+
 }

@@ -1,1 +1,2 @@
 master.jdbcUrl=jdbc:postgresql://postgres:5432/hh
+//master.jdbcUrl=jdbc:postgresql://localhost:5432/hh

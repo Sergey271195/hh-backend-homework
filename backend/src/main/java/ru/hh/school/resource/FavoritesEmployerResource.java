@@ -26,11 +26,13 @@ public class FavoritesEmployerResource {
         this.fileSettings = fileSettings;
     }
 
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getFavoriteEmployers(
             @DefaultValue("0") @QueryParam("page") Integer page,
             @DefaultValue("20") @QueryParam("per_page") Integer perPage) {
+        logger.info("HERE");
         List<FavoriteEmployerDto> favoriteEmployers = employerService.getFavorites(page, perPage);
         return Response.ok()
                 .header("Access-Control-Allow-Origin", fileSettings.getString("cors.settings"))
@@ -87,4 +89,18 @@ public class FavoritesEmployerResource {
             throw new WebApplicationException(exception.getMessage(), exception.getResponse().getStatus());
         }
     }
+
+    @OPTIONS
+    @Path("{var:.*}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response allowOptions() {
+        logger.info("OPTIONS METHOD");
+        return Response.ok()
+                    .header("Access-Control-Allow-Origin", fileSettings.getString("cors.settings"))
+                    .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD")
+                    .header("Access-Control-Allow-Credentials", "true")
+                    .header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
+                    .build();
+    }
+
 }
