@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+import { MainviewContext } from "./context/MainviewContext";
 
-const HeaderComponent = ({ setShowEmployer }) => {
+const HeaderComponent = () => {
+    const { setIsEmployerView } = useContext(MainviewContext);
+
     return (
         <div
             style={{
@@ -19,7 +22,7 @@ const HeaderComponent = ({ setShowEmployer }) => {
                     padding: "20px",
                     borderRadius: "20px",
                 }}
-                onClick={() => setShowEmployer(true)}
+                onClick={() => setIsEmployerView(true)}
             >
                 Employer
             </button>
@@ -30,7 +33,7 @@ const HeaderComponent = ({ setShowEmployer }) => {
                     padding: "20px",
                     borderRadius: "20px",
                 }}
-                onClick={() => setShowEmployer(false)}
+                onClick={() => setIsEmployerView(false)}
             >
                 Vacancy
             </button>

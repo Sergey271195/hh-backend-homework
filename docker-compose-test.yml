@@ -2,7 +2,7 @@ version : "3.9"
 
 services:
   postgres:
-    image: postgres:13-alpine
+    image: postgres:10.7-alpine
     restart: always
     volumes:
       - ./backend/init.sql:/docker-entrypoint-initdb.d/init.sql
@@ -22,6 +22,7 @@ services:
     build: ./backend
     ports:
       - 8080
+    restart: always
     depends_on:
       postgres:
         condition: service_healthy

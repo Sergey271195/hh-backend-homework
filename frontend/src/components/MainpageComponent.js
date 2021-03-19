@@ -1,19 +1,30 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import "../App.css";
 import HeaderComponent from "./HeaderComponent";
-import EmployerCompnent from "./employer/EmployerCompnent";
+import EmployerComponent from "./employer/EmployerComponent";
+import { MainviewContext } from "./context/MainviewContext";
+import EmployerViewContextProvider from "./context/EmployerViewContext";
+import EmployerContextProvider from "./context/EmployerContext";
+import EnvironmentContextProvider from "./context/EnvironmentContext";
 
 const MainpageComponent = () => {
-    const [showEmployer, setShowEmployer] = useState(true);
-
+    const { isEmployerView } = useContext(MainviewContext);
     return (
-        <div className="maincontainer">
-            <HeaderComponent setShowEmployer={setShowEmployer} />
-            <div className="viewcontainer">
-                {showEmployer && <EmployerCompnent />}
-                {!showEmployer && <div>Work in progress</div>}
+        <EnvironmentContextProvider>
+            <div className="maincontainer">
+                <HeaderComponent />
+                <div className="viewcontainer">
+                    {isEmployerView && (
+                        <EmployerViewContextProvider>
+                            <EmployerContextProvider>
+                                <EmployerComponent />
+                            </EmployerContextProvider>
+                        </EmployerViewContextProvider>
+                    )}
+                    {!isEmployerView && <div>Work in progress</div>}
+                </div>
             </div>
-        </div>
+        </EnvironmentContextProvider>
     );
 };
 

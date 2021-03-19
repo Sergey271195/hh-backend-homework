@@ -1,49 +1,55 @@
 .viewer::-webkit-scrollbar {
-  display: none;
+    display: none;
 }
 
 .viewer {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  display: flex;
-  height: 80%;
-  width: 80%;
-  overflow: auto;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border: 2px solid grey;
-  border-radius: 20px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    display: flex;
+    height: 80%;
+    width: 80%;
+    overflow: auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid grey;
+    border-radius: 20px;
 }
 
 .maincontainer {
-  height: 100%;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .viewcontainer {
-  height: 85%;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    height: 85%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .viewercontainer {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  width: 80%;
-  align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 80%;
+    align-items: center;
 }
 
 .subsectionbutton {
-  padding: 10px;
-  margin-bottom: 10px;
-  font-size: 14px;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.formInput {
+    font-size: 15px;
+    padding: 10px;
+    margin-bottom: 10px;
 }
