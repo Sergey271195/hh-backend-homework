@@ -10,6 +10,7 @@ RUN npm run build
 
 FROM nginx:1.19-alpine
 COPY --from=build /app/frontend/build /app/frontend
+COPY ./public/images /app/frontend/images/
 
 COPY nginx.conf /etc/nginx/nginx.conf
 
