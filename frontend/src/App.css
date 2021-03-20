@@ -194,3 +194,17 @@ input[type="radio"] {
     padding: 5px;
     cursor: pointer;
 }
+
+.salary {
+    font-size: 18px;
+    font-weight: 400;
+    color: #333;
+}
+
+.employer_link {
+    cursor: pointer;
+}
+
+.employer_link:hover {
+    color: #2998ff;
+}

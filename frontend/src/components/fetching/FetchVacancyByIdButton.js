@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { EnvironmentContext } from "../context/EnvironmentContext";
 import { GlobalInputContext } from "../context/GlobalInputContext";
 import { VacancyContext } from "../context/VacancyContext";
-import { fetchVacancyrById } from "./FecthFunctions";
+import { fetchVacancyById } from "./FecthFunctions";
 
 const FetchVacancyByIdButton = () => {
     const { environment } = useContext(EnvironmentContext);
@@ -18,7 +18,7 @@ const FetchVacancyByIdButton = () => {
             alert("Неверно указанный идентификатор");
             return;
         }
-        fetchVacancyrById(environment.baseUrl, globalInput.value).then((data) =>
+        fetchVacancyById(environment.baseUrl, globalInput.value).then((data) =>
             dispatchVacancy({ type: "SET_VACANCY", vacancy: data })
         );
     };

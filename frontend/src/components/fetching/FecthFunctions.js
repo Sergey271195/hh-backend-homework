@@ -14,7 +14,7 @@ export const fetchEmployerById = (baseUrl, id) => {
         .catch((error) => console.log(error.message));
 };
 
-export const fetchVacancyrById = (baseUrl, id) => {
+export const fetchVacancyById = (baseUrl, id) => {
     return fetch(baseUrl + `/vacancy/${id}`)
         .then((response) => {
             if (response.ok) {
@@ -24,7 +24,7 @@ export const fetchVacancyrById = (baseUrl, id) => {
             throw new Error();
         })
         .then((data) => {
-            console.log(data);
+            console.log("By id", data);
             return [data];
         })
         .catch((error) => console.log(error.message));
