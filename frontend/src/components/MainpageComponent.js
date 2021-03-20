@@ -7,6 +7,9 @@ import EmployerViewContextProvider from "./context/EmployerViewContext";
 import EmployerContextProvider from "./context/EmployerContext";
 import EnvironmentContextProvider from "./context/EnvironmentContext";
 import GlobalInputContextProvider from "./context/GlobalInputContext";
+import VacancyViewContextProvider from "./context/VacancyViewContext";
+import VacancyContextProvider from "./context/VacancyContext";
+import VacancyComponent from "./vacancy/VacancyComponent";
 
 const MainpageComponent = () => {
     const { isEmployerView } = useContext(MainviewContext);
@@ -15,11 +18,18 @@ const MainpageComponent = () => {
             <GlobalInputContextProvider>
                 <EmployerViewContextProvider>
                     <EmployerContextProvider>
-                        <div className="maincontainer">
-                            <HeaderComponent />
-                            {isEmployerView && <EmployerComponent />}
-                            {!isEmployerView && <div>Work in progress</div>}
-                        </div>
+                        <VacancyViewContextProvider>
+                            <VacancyContextProvider>
+                                <div className="maincontainer">
+                                    <HeaderComponent />
+                                    {isEmployerView ? (
+                                        <EmployerComponent />
+                                    ) : (
+                                        <VacancyComponent />
+                                    )}
+                                </div>
+                            </VacancyContextProvider>
+                        </VacancyViewContextProvider>
                     </EmployerContextProvider>
                 </EmployerViewContextProvider>
             </GlobalInputContextProvider>

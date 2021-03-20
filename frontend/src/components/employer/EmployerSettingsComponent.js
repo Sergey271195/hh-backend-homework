@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import { EmployerContext } from "./context/EmployerContext";
-import { EmployerViewContext } from "./context/EmployerViewContext";
-import { GlobalInputContext } from "./context/GlobalInputContext";
-import PaginationComponent from "./PaginationComponent";
+import { EmployerContext } from "../context/EmployerContext";
+import { EmployerViewContext } from "../context/EmployerViewContext";
+import { GlobalInputContext } from "../context/GlobalInputContext";
+import PaginationComponent from "../PaginationComponent";
 
 const EmployerSettingsComponent = () => {
     const { employerView, setEmployerView } = useContext(EmployerViewContext);

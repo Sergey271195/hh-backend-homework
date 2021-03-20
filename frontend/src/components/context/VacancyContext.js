@@ -1,13 +1,38 @@
 import React, { createContext, useReducer } from "react";
 
+const defaultState = {
+    vacancy: [],
+    error: null,
+};
+
 const VacancyReducer = (state, action) => {
     switch (action.type) {
         case "SET_VACANCY":
             return {
                 vacancy: action.vacancy,
             };
+        case "DELETE_VACANCY": {
+            const filteredVacancy = state.vacancy.filter(
+                (vac) => vac.id !== action.id
+            );
+            return { ...state, vacancy: filteredVacancy };
+        }
+        case "UPDATE_COMMENT": {
+            const updatedVacancy = state.vacancy.map((vac) => {
+                return vac.id === action.id
+                    ? { ...vac, comment: action.comment }
+                    : vac;
+            });
+            return { ...state, vacancy: updatedVacancy };
+        }
+        case "ERROR": {
+            return {
+                vacancy: [],
+                error: action.error,
+            };
+        }
         case "CLEAR":
-            return { vacancy: "" };
+            return defaultState;
         default:
             return state;
     }

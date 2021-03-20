@@ -1,31 +1,29 @@
 import React, { useContext, useEffect } from "react";
-import { EmployerContext } from "../context/EmployerContext";
 import { EnvironmentContext } from "../context/EnvironmentContext";
 import { GlobalInputContext } from "../context/GlobalInputContext";
 import { PaginationContext } from "../context/PaginationContext";
+import { VacancyContext } from "../context/VacancyContext";
 
-const FetchFavoriteEmployerButton = () => {
+const FetchFavoriteVacancyButton = () => {
     const { environment } = useContext(EnvironmentContext);
-    const { dispatchEmployer } = useContext(EmployerContext);
+    const { dispatchVacancy } = useContext(VacancyContext);
     const { pagination } = useContext(PaginationContext);
     const { globalInput } = useContext(GlobalInputContext);
 
     const handleFetch = () => {
         const requestQuery = `?page=${pagination.page}&per_page=${pagination.per_page}`;
-        fetchFavoriteEmployers(requestQuery);
+        fetchFavoriteVacancies(requestQuery);
     };
 
     const handleFetchedData = (data) => {
         if (!globalInput.value) return data;
-        return data.filter((employer) =>
-            employer.name
-                .toLowerCase()
-                .includes(globalInput.value.toLowerCase())
+        return data.filter((vacancy) =>
+            vacancy.name.toLowerCase().includes(globalInput.value.toLowerCase())
         );
     };
 
-    const fetchFavoriteEmployers = (requestQuery) => {
-        fetch(environment.baseUrl + "/favorites/employer" + requestQuery)
+    const fetchFavoriteVacancies = (requestQuery) => {
+        fetch(environment.baseUrl + "/favorites/vacancy" + requestQuery)
             .then((response) => {
                 if (response.ok) {
                     return response.json();
@@ -33,21 +31,21 @@ const FetchFavoriteEmployerButton = () => {
                 response
                     .json()
                     .then((error) =>
-                        dispatchEmployer({ type: "SET_EMPLOYER", employer: [] })
+                        dispatchVacancy({ type: "SET_VACANCY", vacancy: [] })
                     );
                 throw new Error();
             })
             .then((data) => {
-                dispatchEmployer({
-                    type: "SET_EMPLOYER",
-                    employer: handleFetchedData(data),
+                dispatchVacancy({
+                    type: "SET_VACANCY",
+                    vacancy: handleFetchedData(data),
                 });
             })
             .catch((error) => console.log(error.message));
     };
 
     useEffect(() => {
-        fetchFavoriteEmployers(`?page=&per_page=`);
+        fetchFavoriteVacancies(`?page=&per_page=`);
     }, []);
 
     return (
@@ -57,4 +55,4 @@ const FetchFavoriteEmployerButton = () => {
     );
 };
 
-export default FetchFavoriteEmployerButton;
+export default FetchFavoriteVacancyButton;

@@ -4,8 +4,8 @@ import "../App.css";
 import { GlobalInputContext } from "./context/GlobalInputContext";
 import SettingsComponent from "./SettingsComponent";
 import { PaginationContext } from "./context/PaginationContext";
-import EmployerSearchButtonComponent from "./EmployerSearchButtonComponent";
-import VacancySearchButtonComponent from "./VacancySearchButtonComponent";
+import EmployerSearchButtonComponent from "./employer/EmployerSearchButtonComponent";
+import VacancySearchButtonComponent from "./vacancy/VacancySearchButtonComponent";
 
 const SearchBarComponent = () => {
     const { isEmployerView, setIsEmployerView } = useContext(MainviewContext);

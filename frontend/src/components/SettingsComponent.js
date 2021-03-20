@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { MainviewContext } from "./context/MainviewContext";
 import "../App.css";
-import EmployerSettingsComponent from "./EmployerSettingsComponent";
-import VacancySettingsComponent from "./VacancySettingsComponent";
+import EmployerSettingsComponent from "./employer/EmployerSettingsComponent";
+import VacancySettingsComponent from "./vacancy/VacancySettingsComponent";
 
 const SettingsComponent = () => {
     const { isEmployerView } = useContext(MainviewContext);

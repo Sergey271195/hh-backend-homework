@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
-import { EmployerContext } from "../context/EmployerContext";
 import { EnvironmentContext } from "../context/EnvironmentContext";
 import { GlobalInputContext } from "../context/GlobalInputContext";
 import { PaginationContext } from "../context/PaginationContext";
+import { VacancyContext } from "../context/VacancyContext";
 
-const FetchEmployerListButton = () => {
+const FetchVacancyListButton = () => {
     const { environment } = useContext(EnvironmentContext);
-    const { dispatchEmployer } = useContext(EmployerContext);
+    const { dispatchVacancy } = useContext(VacancyContext);
     const { pagination } = useContext(PaginationContext);
     const { globalInput } = useContext(GlobalInputContext);
 
@@ -15,25 +15,24 @@ const FetchEmployerListButton = () => {
         const per_page = pagination.per_page;
         const query = globalInput.value;
         const requestQuery = `?query=${query}&page=${page}&per_page=${per_page}`;
-        fetchFavoriteEmployers(requestQuery);
+        fetchFavoriteVacancy(requestQuery);
     };
 
-    const fetchFavoriteEmployers = (requestQuery) => {
-        fetch(environment.baseUrl + `/employer` + requestQuery)
+    const fetchFavoriteVacancy = (requestQuery) => {
+        fetch(environment.baseUrl + `/vacancy` + requestQuery)
             .then((response) => {
                 if (response.ok) {
                     return response.json();
                 }
-                response.json().then((error) =>
-                    dispatchEmployer({
-                        type: "SET_EMPLOYER",
-                        employer: [],
-                    })
-                );
+                response
+                    .json()
+                    .then((error) =>
+                        dispatchVacancy({ type: "SET_VACANCY", vacancy: [] })
+                    );
                 throw new Error();
             })
             .then((data) => {
-                dispatchEmployer({ type: "SET_EMPLOYER", employer: data });
+                dispatchVacancy({ type: "SET_VACANCY", vacancy: data });
             })
             .catch((error) => console.log(error.message));
     };
@@ -45,4 +44,4 @@ const FetchEmployerListButton = () => {
     );
 };
 
-export default FetchEmployerListButton;
+export default FetchVacancyListButton;

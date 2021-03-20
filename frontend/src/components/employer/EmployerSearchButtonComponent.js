@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import { EmployerViewContext } from "./context/EmployerViewContext";
-import FetchEmployerListButton from "./fetching/FetchEmployerListButton";
-import FetchEmployerByIdButton from "./fetching/FetchEmployerByIdButton";
-import FetchFavoriteEmployerButton from "./fetching/FetchFavoriteEmployerButton";
+import { EmployerViewContext } from "../context/EmployerViewContext";
+import FetchEmployerListButton from "../fetching/FetchEmployerListButton";
+import FetchEmployerByIdButton from "../fetching/FetchEmployerByIdButton";
+import FetchFavoriteEmployerButton from "../fetching/FetchFavoriteEmployerButton";
 
 const EmployerSearchButtonComponent = () => {
     const { employerView } = useContext(EmployerViewContext);
