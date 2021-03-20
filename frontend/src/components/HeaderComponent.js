@@ -1,43 +1,39 @@
-import React, { useContext } from "react";
-import { MainviewContext } from "./context/MainviewContext";
+import React, { useState } from "react";
+import "../App.css";
+import PaginationContextProvider from "./context/PaginationContext";
+import SearchBarComponent from "./SearchBarComponent";
 
 const HeaderComponent = () => {
-    const { setIsEmployerView } = useContext(MainviewContext);
+    const [showSearchBar, setShowSearchBar] = useState(true);
 
     return (
-        <div
-            style={{
-                display: "flex",
-                height: "15%",
-                width: "100%",
-                justifyContent: "space-around",
-                backgroundColor: "lightgoldenrodyellow",
-                alignItems: "center",
-            }}
-        >
-            <button
-                style={{
-                    width: "150px",
-                    fontSize: "15px",
-                    padding: "20px",
-                    borderRadius: "20px",
-                }}
-                onClick={() => setIsEmployerView(true)}
-            >
-                Employer
-            </button>
-            <button
-                style={{
-                    width: "150px",
-                    fontSize: "15px",
-                    padding: "20px",
-                    borderRadius: "20px",
-                }}
-                onClick={() => setIsEmployerView(false)}
-            >
-                Vacancy
-            </button>
-        </div>
+        <>
+            <div className="mainheader">
+                <div className="headhunter_header">
+                    <img className="headhunter_logo" src="/images/logo.png" />
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                        <img
+                            style={{ cursor: "pointer" }}
+                            src="/images/search_icon.png"
+                            onClick={() => setShowSearchBar(!showSearchBar)}
+                        />
+                        <label
+                            style={{
+                                color: "white",
+                                marginLeft: "20px",
+                                cursor: "pointer",
+                            }}
+                            onClick={() => setShowSearchBar(!showSearchBar)}
+                        >
+                            Поиск
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <PaginationContextProvider>
+                {showSearchBar && <SearchBarComponent />}
+            </PaginationContextProvider>
+        </>
     );
 };
 

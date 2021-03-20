@@ -5,7 +5,7 @@ import MainpageComponent from "./components/MainpageComponent";
 function App() {
     return (
         <MainviewContextProvider>
-            <MainpageComponent />;
+            <MainpageComponent />
         </MainviewContextProvider>
     );
 }

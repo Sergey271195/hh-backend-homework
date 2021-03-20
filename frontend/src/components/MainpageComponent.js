@@ -6,24 +6,31 @@ import { MainviewContext } from "./context/MainviewContext";
 import EmployerViewContextProvider from "./context/EmployerViewContext";
 import EmployerContextProvider from "./context/EmployerContext";
 import EnvironmentContextProvider from "./context/EnvironmentContext";
+import GlobalInputContextProvider from "./context/GlobalInputContext";
 
 const MainpageComponent = () => {
     const { isEmployerView } = useContext(MainviewContext);
     return (
         <EnvironmentContextProvider>
-            <div className="maincontainer">
-                <HeaderComponent />
-                <div className="viewcontainer">
-                    {isEmployerView && (
-                        <EmployerViewContextProvider>
-                            <EmployerContextProvider>
-                                <EmployerComponent />
-                            </EmployerContextProvider>
-                        </EmployerViewContextProvider>
-                    )}
-                    {!isEmployerView && <div>Work in progress</div>}
-                </div>
-            </div>
+            <GlobalInputContextProvider>
+                <EmployerViewContextProvider>
+                    <EmployerContextProvider>
+                        <div className="maincontainer">
+                            <HeaderComponent />
+                            {/* <div className="viewcontainer">
+                        {isEmployerView && (
+                            <EmployerViewContextProvider>
+                                <EmployerContextProvider>
+                                    <EmployerComponent />
+                                </EmployerContextProvider>
+                            </EmployerViewContextProvider>
+                        )}
+                        {!isEmployerView && <div>Work in progress</div>}
+                    </div> */}
+                        </div>
+                    </EmployerContextProvider>
+                </EmployerViewContextProvider>
+            </GlobalInputContextProvider>
         </EnvironmentContextProvider>
     );
 };
