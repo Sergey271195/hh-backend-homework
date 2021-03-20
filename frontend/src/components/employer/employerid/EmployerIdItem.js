@@ -29,25 +29,23 @@ const EmployerIdItem = ({
             .catch((error) => console.log(error.message));
     };
     return (
-        <form
-            style={{ display: "flex", flexDirection: "column" }}
-            onSubmit={handleAddToFavorite}
-        >
-            <div>Id: {id}</div>
-            <div>Наименование компании: {name}</div>
-            <div>Описание: {description}</div>
-            <div>
-                Местоположение: {areaId}: {areaName}
-            </div>
+        <form className="itemcontainer" onSubmit={handleAddToFavorite}>
+            <div className="link">{name}</div>
+            <div className="area">{areaName}</div>
+            <div
+                className="description"
+                dangerouslySetInnerHTML={{ __html: description }}
+            ></div>
+
             <div>
                 <input
+                    className="comment"
+                    placeholder="Комментарий"
                     type="text"
                     value={comment}
                     onChange={(event) => setComment(event.target.value)}
                 />
-                <button className="subsectionbutton">
-                    Добавить в избранное
-                </button>
+                <button className="item_button">Добавить в избранное</button>
             </div>
         </form>
     );

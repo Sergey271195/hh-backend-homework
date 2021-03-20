@@ -4,10 +4,10 @@ import EmployerIdItem from "./EmployerIdItem";
 
 const EmployerApiIdComponent = () => {
     const { employer } = useContext(EmployerContext);
-
     return (
         <div>
-            {employer?.employer &&
+            {employer.employer.length === 1 &&
+                employer?.employer &&
                 employer.employer.map((emp) => (
                     <EmployerIdItem employer={emp} />
                 ))}

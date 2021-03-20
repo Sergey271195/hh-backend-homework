@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { EmployerContext } from "../context/EmployerContext";
 import { EnvironmentContext } from "../context/EnvironmentContext";
 import { GlobalInputContext } from "../context/GlobalInputContext";
+import { fetchEmployerById } from "./FecthFunctions";
 
 const FetchEmployerByIdButton = () => {
     const { environment } = useContext(EnvironmentContext);
@@ -17,26 +18,9 @@ const FetchEmployerByIdButton = () => {
             alert("Неверно указанный идентификатор");
             return;
         }
-        fetchEmployerById(globalInput.value);
-    };
-
-    const fetchEmployerById = (id) => {
-        fetch(environment.baseUrl + `/employer/${id}`)
-            .then((response) => {
-                if (response.ok) {
-                    return response.json();
-                }
-                response
-                    .json()
-                    .then((error) =>
-                        dispatchEmployer({ type: "ERROR", error: error })
-                    );
-                throw new Error();
-            })
-            .then((data) => {
-                dispatchEmployer({ type: "SET_EMPLOYER", employer: [data] });
-            })
-            .catch((error) => console.log(error.message));
+        fetchEmployerById(environment.baseUrl, globalInput.value).then((data) =>
+            dispatchEmployer({ type: "SET_EMPLOYER", employer: data })
+        );
     };
 
     return (

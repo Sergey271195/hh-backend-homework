@@ -71,34 +71,52 @@ const FavoriteEmployerItem = ({
     };
 
     return (
-        <div style={{ display: "flex" }}>
-            <div
-                style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    width: "50%",
-                }}
-            >
-                <div>Id: {id}</div>
-                <div>Наименование компании: {name}</div>
-                <div>Дата создания: {date_create}</div>
-                <div>Описание: {description}</div>
-                <div>
-                    Местоположение: {area.id}: {area.name}
+        <div className="itemcontainer">
+            <div style={{ marginBottom: "10px" }}>
+                <span
+                    style={{
+                        padding: "3px 10px",
+                        backgroundColor:
+                            popularity === "POPULAR" ? "#effbdf" : "#fcf4d6",
+                    }}
+                >
+                    {popularity} <span className="area">({views_count})</span>
+                </span>
+            </div>
+            <div style={{ display: "flex", flexDirection: "column" }}>
+                <div
+                    className="link"
+                    style={{ display: "flex", alignItems: "center" }}
+                >
+                    {name}{" "}
+                    <span className="area" style={{ marginLeft: "20px" }}>
+                        ({date_create})
+                    </span>
+                    <span className="trash_icon" onClick={() => handleDelete()}>
+                        <img
+                            style={{ height: "25px", width: "25px" }}
+                            src="/images/trash_icon.png"
+                        />
+                    </span>
                 </div>
-                <div>Комментарий: {comment}</div>
-                <div>Популярность: {popularity}</div>
-                <div>Число просмотров: {views_count}</div>
-
+                <div className="area">{area.name}</div>
+                <div
+                    className="description"
+                    dangerouslySetInnerHTML={{ __html: description }}
+                ></div>
+                <div style={{ marginTop: "10px" }}>
+                    <span className="boldspan">Ваш комментарий:</span>
+                    {comment}
+                </div>
                 <form
                     onSubmit={handleCommentUpdate}
                     style={{ display: "flex", alignItems: "baseline" }}
                 >
-                    <label style={{ marginLeft: "20px" }}>
-                        Новый комментарий
+                    <label style={{ marginRight: "20px" }}>
+                        Изменить комментарий
                     </label>
                     <input
-                        className="formInput"
+                        className="comment"
                         type="text"
                         value={updateComment}
                         onChange={(event) =>
@@ -106,20 +124,6 @@ const FavoriteEmployerItem = ({
                         }
                     />
                 </form>
-            </div>
-            <div>
-                <button
-                    className="subsectionbutton"
-                    onClick={() => handleDelete()}
-                >
-                    X
-                </button>
-                <button
-                    className="subsectionbutton"
-                    onClick={() => handleRefresh()}
-                >
-                    Refresh
-                </button>
             </div>
         </div>
     );

@@ -17,16 +17,8 @@ const MainpageComponent = () => {
                     <EmployerContextProvider>
                         <div className="maincontainer">
                             <HeaderComponent />
-                            {/* <div className="viewcontainer">
-                        {isEmployerView && (
-                            <EmployerViewContextProvider>
-                                <EmployerContextProvider>
-                                    <EmployerComponent />
-                                </EmployerContextProvider>
-                            </EmployerViewContextProvider>
-                        )}
-                        {!isEmployerView && <div>Work in progress</div>}
-                    </div> */}
+                            {isEmployerView && <EmployerComponent />}
+                            {!isEmployerView && <div>Work in progress</div>}
                         </div>
                     </EmployerContextProvider>
                 </EmployerViewContextProvider>
