@@ -2,7 +2,7 @@ FROM node:14.16.0-alpine3.10 AS build
 
 WORKDIR /app/frontend
 
-COPY package.json yarn.lock ./
+ADD package.json yarn.lock ./
 
 RUN npm install
 COPY . .
