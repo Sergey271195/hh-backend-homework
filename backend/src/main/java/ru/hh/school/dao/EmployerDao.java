@@ -46,7 +46,7 @@ public class EmployerDao extends GenericDao {
     }
 
     public List<Employer> getFavoritesWithPagination(Integer page, Integer perPage) {
-        Query query =  eagerQuery();
+        Query<Employer> query =  eagerQuery();
         query.setFirstResult(perPage * page);
         query.setMaxResults(perPage);
         return query.getResultList();

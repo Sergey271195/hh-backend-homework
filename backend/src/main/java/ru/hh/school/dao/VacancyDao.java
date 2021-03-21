@@ -52,7 +52,7 @@ public class VacancyDao extends GenericDao {
     }
 
     public List<Vacancy> getFavoritesWithPagination(Integer page, Integer perPage) {
-        Query query =  eagerQuery();
+        Query<Vacancy> query =  eagerQuery();
         query.setFirstResult(perPage * page);
         query.setMaxResults(perPage);
         return query.getResultList();
